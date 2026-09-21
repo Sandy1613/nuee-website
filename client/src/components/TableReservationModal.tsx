@@ -9,9 +9,11 @@ import { useTableBookingModal } from "@/context/TableBookingModalContext";
 import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/Button";
 import { Input, Label, Textarea, FieldError } from "@/components/ui/Field";
+import { useSystemMode } from "@/hooks/useSystemMode";
 
 export function TableReservationModal() {
   const { isOpen, close } = useTableBookingModal();
+  const { isDemo } = useSystemMode();
   const [reference, setReference] = useState<string | null>(null);
 
   const {
@@ -136,6 +138,12 @@ export function TableReservationModal() {
                   <p className="text-xs text-ivory/40 leading-relaxed">
                     No payment is required to reserve. Online payments are coming soon.
                   </p>
+                  {isDemo && (
+                    <p className="text-xs text-amber-300/80 leading-relaxed">
+                      Demo Mode: please do not enter real personal information. This submission is stored
+                      temporarily in memory for this preview only and is never saved permanently.
+                    </p>
+                  )}
 
                   {mutation.isError && (
                     <p className="text-sm text-red-400">

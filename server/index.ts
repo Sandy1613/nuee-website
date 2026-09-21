@@ -3,8 +3,10 @@ import express from "express";
 import { createServer } from "http";
 import { publicRouter } from "./routes/public";
 import { adminRouter } from "./routes/admin";
+import { systemRouter } from "./routes/system";
 import { createSessionMiddleware } from "./auth";
 import { log, setupVite, serveStatic } from "./vite";
+import { isDemoMode, DEMO_ADMIN_EMAIL, DEMO_ADMIN_PASSWORD } from "./mode";
 
 const app = express();
 app.set("trust proxy", 1);
@@ -34,6 +36,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/api/system", systemRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api", publicRouter);
 
@@ -56,6 +59,12 @@ async function main() {
   const port = Number(process.env.PORT) || 5000;
   server.listen(port, "0.0.0.0", () => {
     log(`Nuée Tavern & Bar server listening on port ${port}`);
+    if (isDemoMode()) {
+      log("Running in DEMO MODE — no DATABASE_URL set. Using in-memory sample data, reset on every restart.");
+      log(`Demo admin login: ${DEMO_ADMIN_EMAIL} / ${DEMO_ADMIN_PASSWORD}`);
+    } else {
+      log("Running in PRODUCTION MODE — connected to PostgreSQL via DATABASE_URL.");
+    }
   });
 }
 

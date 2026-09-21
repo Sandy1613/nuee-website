@@ -13,6 +13,7 @@ import { Reveal } from "@/components/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Input, Label, Textarea, Select, FieldError } from "@/components/ui/Field";
+import { useSystemMode } from "@/hooks/useSystemMode";
 import NotFound from "@/pages/NotFound";
 
 export default function EventDetails() {
@@ -36,6 +37,7 @@ function EventDetailsContent({
   onBooked: (reference: string) => void;
 }) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const { isDemo } = useSystemMode();
   const bookableSessions = event.sessions.filter((s) => isBookable(s.availability));
 
   const {
@@ -251,6 +253,12 @@ function EventDetailsContent({
                 <p className="text-xs text-ivory/35 text-center">
                   This confirms an enquiry, pending our team's confirmation. No payment is collected.
                 </p>
+                {isDemo && (
+                  <p className="text-xs text-amber-300/80 text-center">
+                    Demo Mode: please do not enter real personal information. This submission is stored temporarily
+                    in memory for this preview only and is never saved permanently.
+                  </p>
+                )}
               </form>
             )}
           </div>
