@@ -1,4 +1,16 @@
 import "dotenv/config";
+
+if (!process.env.DATABASE_URL) {
+  console.error(
+    "DATABASE_URL is not set, so there is no PostgreSQL database to seed.\n" +
+      "This script only seeds the production database — it has nothing to do with demo mode.\n" +
+      "Demo mode (running the app with no DATABASE_URL) already ships with its own built-in sample data; " +
+      "just run `npm run dev` and it works with zero setup.\n" +
+      "To seed a real database instead, set DATABASE_URL in .env, run `npm run db:push`, then re-run `npm run db:seed`.",
+  );
+  process.exit(1);
+}
+
 import { db, pool } from "./db";
 import {
   adminUsers,

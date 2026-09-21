@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { useTableBookingModal } from "@/context/TableBookingModalContext";
+import { useSystemMode } from "@/hooks/useSystemMode";
 
 const links = [
   { href: "/", label: "Home" },
@@ -18,6 +19,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { open } = useTableBookingModal();
+  const { isDemo } = useSystemMode();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -33,7 +35,8 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-editorial",
+        "fixed left-0 right-0 z-50 transition-all duration-500 ease-editorial",
+        isDemo ? "top-9" : "top-0",
         scrolled || mobileOpen ? "bg-charcoal-deep/95 backdrop-blur border-b border-ivory/10 py-4" : "bg-transparent py-7",
       )}
     >

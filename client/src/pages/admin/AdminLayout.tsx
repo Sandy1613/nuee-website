@@ -18,6 +18,8 @@ import {
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { apiRequest } from "@/lib/queryClient";
 import { cn } from "@/lib/utils";
+import { useSystemMode } from "@/hooks/useSystemMode";
+import { DemoBanner } from "@/components/DemoBanner";
 
 const navItems = [
   { href: "/admin", label: "Overview", icon: LayoutDashboard },
@@ -36,6 +38,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const [location, navigate] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const queryClient = useQueryClient();
+  const { isDemo } = useSystemMode();
 
   useEffect(() => {
     if (!isLoading && !admin) navigate("/admin/login");
@@ -55,7 +58,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   if (!admin) return null;
 
   return (
-    <div className="min-h-screen bg-charcoal-deep flex">
+    <div className="min-h-screen bg-charcoal-deep flex flex-col">
+      <DemoBanner />
+      <div className={cn("flex flex-1", isDemo && "pt-9")}>
       {/* Sidebar - desktop */}
       <aside className="hidden lg:flex w-64 shrink-0 flex-col border-r border-ivory/10 p-6">
         <Link href="/admin" className="font-display text-xl tracking-widest2 mb-10 block">
@@ -91,7 +96,12 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       </aside>
 
       {/* Mobile top bar */}
-      <div className="lg:hidden fixed top-0 inset-x-0 z-40 bg-charcoal-deep border-b border-ivory/10 flex items-center justify-between px-5 py-4">
+      <div
+        className={cn(
+          "lg:hidden fixed inset-x-0 z-40 bg-charcoal-deep border-b border-ivory/10 flex items-center justify-between px-5 py-4",
+          isDemo ? "top-9" : "top-0",
+        )}
+      >
         <Link href="/admin" className="font-display text-lg tracking-widest2">
           NU<span className="text-gold">É</span>E ADMIN
         </Link>
@@ -100,7 +110,12 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         </button>
       </div>
       {mobileOpen && (
-        <div className="lg:hidden fixed top-[61px] inset-x-0 z-30 bg-charcoal-deep border-b border-ivory/10 p-5 space-y-1">
+        <div
+          className={cn(
+            "lg:hidden fixed inset-x-0 z-30 bg-charcoal-deep border-b border-ivory/10 p-5 space-y-1",
+            isDemo ? "top-[97px]" : "top-[61px]",
+          )}
+        >
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -124,6 +139,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       )}
 
       <main className="flex-1 min-w-0 p-6 lg:p-10 pt-24 lg:pt-10">{children}</main>
+      </div>
     </div>
   );
 }
