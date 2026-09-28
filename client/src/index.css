@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Default theme values. These are overwritten at runtime by
+ * client/src/lib/theme.ts (applyTheme) using whatever an admin has saved
+ * under Admin → Appearance — see that file for how the full palette is
+ * derived from just 3 picked colors. These defaults exist so the site
+ * still looks right before that JS runs (or if it never customizes).
+ */
+:root {
+  --color-charcoal: 27 25 23;
+  --color-charcoal-light: 40 36 31;
+  --color-charcoal-deep: 16 15 14;
+  --color-ivory: 246 241 231;
+  --color-ivory-soft: 239 232 216;
+  --color-ivory-dim: 222 212 187;
+  --color-gold: 182 144 63;
+  --color-gold-light: 211 184 118;
+  --color-gold-muted: 140 112 66;
+  --color-gold-deep: 122 95 49;
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
 @layer base {
   * {
     @apply border-ivory/10;
@@ -50,17 +72,17 @@
 }
 
 ::selection {
-  background: #b6903f;
-  color: #1b1917;
+  background: rgb(var(--color-gold));
+  color: rgb(var(--color-charcoal-deep));
 }
 
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #1b1917;
+  background: rgb(var(--color-charcoal));
 }
 ::-webkit-scrollbar-thumb {
-  background: #3a352c;
+  background: rgb(var(--color-charcoal-light));
   border-radius: 999px;
 }

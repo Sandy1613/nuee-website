@@ -30,7 +30,9 @@ export default function AdminContent() {
       {isLoading && <p className="text-ivory/50">Loading…</p>}
 
       <div className="space-y-6">
-        {(content ?? []).map((item) => (
+        {(content ?? [])
+          .filter((item) => item.key !== "theme_config")
+          .map((item) => (
           <div key={item.key} className="border border-ivory/10 p-5">
             <Label>{item.label}</Label>
             <Textarea

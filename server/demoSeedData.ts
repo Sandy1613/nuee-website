@@ -38,6 +38,14 @@ export const DEMO_WEBSITE_CONTENT: { key: string; label: string; value: string }
     value:
       "Valet parking available on weekends. Ample on-street parking on weekdays. Indoor and courtyard seating both available on request.",
   },
+  {
+    key: "theme_config",
+    label: "Theme Configuration",
+    value: JSON.stringify({
+      colors: { background: "#1b1917", text: "#f6f1e7", accent: "#b6903f" },
+      fonts: { heading: "Playfair Display", body: "Inter" },
+    }),
+  },
 ];
 
 export const DEMO_REVIEWS = [

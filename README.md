@@ -158,7 +158,20 @@ URL: `/admin` (redirects to `/admin/login` if not authenticated)
 Sections: Overview, Events (create/edit/publish/duplicate/archive + sessions & capacity), Bookings (search,
 filter, confirm/reject, manual & complimentary bookings, check-in, CSV export), Table Reservations, Menu
 (categories/items, reorder, availability), Reviews, FAQs, Website Content (editable text used across the public
-site — address, hours, hero copy, etc.), and Settings (password change + audit log).
+site — address, hours, hero copy, etc.), Appearance (see below), and Settings (password change + audit log).
+
+### Appearance (no-code theme editor)
+
+Admin → Appearance lets a non-technical admin restyle the entire site — no code, no developer, no rebuild:
+
+- **Colors**: pick a Background, Text and Accent color; every shade used across the site (light/dark variants of
+  each) is derived automatically and applied instantly via CSS custom properties.
+- **Fonts**: choose a heading font and a body font from a curated list of Google Fonts; the chosen fonts are
+  loaded on demand.
+- A live preview panel on the same page shows the result before you save. Saving applies the new theme site-wide
+  (public pages and the admin dashboard itself) immediately — it's stored as normal website content
+  (`theme_config`), so it works the same way in both demo mode and production.
+- **Reset to Default** restores the original charcoal/ivory/gold editorial look at any time.
 
 ### Security implemented
 
