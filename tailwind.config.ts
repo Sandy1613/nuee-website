@@ -6,27 +6,31 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Each token reads from a CSS custom property (set as space-separated
+        // "R G B", see client/src/index.css for defaults) so the whole
+        // palette can be re-themed at runtime from Admin → Appearance
+        // without a rebuild — see client/src/lib/theme.ts.
         charcoal: {
-          DEFAULT: "#1b1917",
-          light: "#28241f",
-          deep: "#100f0e",
+          DEFAULT: "rgb(var(--color-charcoal) / <alpha-value>)",
+          light: "rgb(var(--color-charcoal-light) / <alpha-value>)",
+          deep: "rgb(var(--color-charcoal-deep) / <alpha-value>)",
         },
         ivory: {
-          DEFAULT: "#f6f1e7",
-          soft: "#efe8d8",
-          dim: "#ded4bb",
+          DEFAULT: "rgb(var(--color-ivory) / <alpha-value>)",
+          soft: "rgb(var(--color-ivory-soft) / <alpha-value>)",
+          dim: "rgb(var(--color-ivory-dim) / <alpha-value>)",
         },
         gold: {
-          DEFAULT: "#b6903f",
-          light: "#d3b876",
-          muted: "#8c7042",
-          deep: "#7a5f31",
+          DEFAULT: "rgb(var(--color-gold) / <alpha-value>)",
+          light: "rgb(var(--color-gold-light) / <alpha-value>)",
+          muted: "rgb(var(--color-gold-muted) / <alpha-value>)",
+          deep: "rgb(var(--color-gold-deep) / <alpha-value>)",
         },
       },
       fontFamily: {
-        serif: ["'Cormorant Garamond'", "'Playfair Display'", "serif"],
-        display: ["'Playfair Display'", "serif"],
-        sans: ["'Inter'", "system-ui", "sans-serif"],
+        serif: ["var(--font-display)", "'Playfair Display'", "serif"],
+        display: ["var(--font-display)", "'Playfair Display'", "serif"],
+        sans: ["var(--font-sans)", "'Inter'", "system-ui", "sans-serif"],
       },
       letterSpacing: {
         widest2: "0.28em",

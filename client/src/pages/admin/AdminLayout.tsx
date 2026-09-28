@@ -14,6 +14,8 @@ import {
   Menu as MenuIcon,
   X,
   Armchair,
+  Palette,
+  Images,
 } from "lucide-react";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { apiRequest } from "@/lib/queryClient";
@@ -30,6 +32,8 @@ const navItems = [
   { href: "/admin/reviews", label: "Reviews", icon: MessageSquareQuote },
   { href: "/admin/faqs", label: "FAQs", icon: HelpCircle },
   { href: "/admin/content", label: "Website Content", icon: FileText },
+  { href: "/admin/media", label: "Media", icon: Images },
+  { href: "/admin/appearance", label: "Appearance", icon: Palette },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 

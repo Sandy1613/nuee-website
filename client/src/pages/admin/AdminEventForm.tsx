@@ -9,6 +9,7 @@ import { apiRequest, ApiError } from "@/lib/queryClient";
 import { Button } from "@/components/ui/Button";
 import { Input, Label, Textarea, Select, FieldError } from "@/components/ui/Field";
 import { AdminSessionsManager } from "@/components/admin/AdminSessionsManager";
+import { ImageUploadField } from "@/components/admin/ImageUploadField";
 
 const defaultValues: InsertEvent = {
   slug: "",
@@ -55,6 +56,8 @@ export default function AdminEventForm() {
     handleSubmit,
     control,
     reset,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<InsertEvent>({ resolver: zodResolver(insertEventSchema), defaultValues });
 
@@ -143,10 +146,13 @@ export default function AdminEventForm() {
 
         <section className="border border-ivory/10 p-6 space-y-5">
           <h2 className="font-display text-xl mb-2">Media</h2>
-          <div>
-            <Label>Cover Image URL</Label>
-            <Input {...register("coverImageUrl")} placeholder="https://... (upload-ready field)" />
-          </div>
+          <ImageUploadField
+            label="Cover Image"
+            value={watch("coverImageUrl") ?? ""}
+            onChange={(url) => setValue("coverImageUrl", url, { shouldDirty: true })}
+            folder="events"
+            hint="Shown on the event card and the top of the event details page."
+          />
         </section>
 
         <section className="border border-ivory/10 p-6 space-y-5">

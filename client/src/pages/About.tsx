@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
+import { parseSiteImages } from "@/lib/siteImages";
 
 const sections = [
   {
@@ -49,6 +50,7 @@ const sections = [
 
 export default function About() {
   const { data: content } = useQuery<Record<string, string>>({ queryKey: ["/api/website-content"] });
+  const aboutImages = parseSiteImages(content?.site_images).about.sections;
 
   return (
     <div className="pt-40 pb-28">
@@ -67,7 +69,7 @@ export default function About() {
           <div key={section.title} className="container-editorial grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <Reveal className={i % 2 === 1 ? "lg:order-2" : ""}>
               <div className="aspect-[4/5] overflow-hidden">
-                <img src={section.image} alt={section.title} className="h-full w-full object-cover" />
+                <img src={aboutImages[i] ?? section.image} alt={section.title} className="h-full w-full object-cover" />
               </div>
             </Reveal>
             <Reveal delay={0.1} className={i % 2 === 1 ? "lg:order-1" : ""}>

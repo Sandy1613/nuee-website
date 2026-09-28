@@ -7,6 +7,7 @@ import { systemRouter } from "./routes/system";
 import { createSessionMiddleware } from "./auth";
 import { log, setupVite, serveStatic } from "./vite";
 import { isDemoMode, DEMO_ADMIN_EMAIL, DEMO_ADMIN_PASSWORD } from "./mode";
+import { isImageUploadConfigured } from "./uploads";
 
 const app = express();
 app.set("trust proxy", 1);
@@ -65,6 +66,11 @@ async function main() {
     } else {
       log("Running in PRODUCTION MODE — connected to PostgreSQL via DATABASE_URL.");
     }
+    log(
+      isImageUploadConfigured()
+        ? "Image uploads are configured (Cloudinary) — admin can upload photos directly."
+        : "Image uploads are NOT configured — set CLOUDINARY_CLOUD_NAME/API_KEY/API_SECRET to enable them.",
+    );
   });
 }
 

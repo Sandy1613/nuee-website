@@ -355,6 +355,14 @@ async function seedWebsiteContent() {
       label: "Parking & Dining Information",
       value: "Valet parking available on weekends. Ample on-street parking on weekdays. Indoor and courtyard seating both available on request.",
     },
+    {
+      key: "theme_config",
+      label: "Theme Configuration",
+      value: JSON.stringify({
+        colors: { background: "#1b1917", text: "#f6f1e7", accent: "#b6903f" },
+        fonts: { heading: "Playfair Display", body: "Inter" },
+      }),
+    },
   ];
   for (const entry of entries) {
     const [existing] = await db.select().from(websiteContent).where(eq(websiteContent.key, entry.key));

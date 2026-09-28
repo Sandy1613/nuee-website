@@ -16,6 +16,7 @@ import {
   tableReservationStatusEnum,
 } from "@shared/schema";
 import * as storage from "../storage";
+import { uploadMiddleware, uploadBufferToCloudinary, isImageUploadConfigured } from "../uploads";
 
 export const adminRouter = Router();
 
@@ -76,6 +77,43 @@ adminRouter.use(requireAdmin);
 
 adminRouter.get("/overview", async (_req, res) => {
   res.json(await storage.getOverviewStats());
+});
+
+// ---------------------------------------------------------------------------
+// Image uploads
+// ---------------------------------------------------------------------------
+
+adminRouter.post("/uploads", (req, res) => {
+  if (!isImageUploadConfigured()) {
+    return res.status(501).json({
+      message:
+        "Image uploads are not configured yet. Set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET to enable this.",
+    });
+  }
+  uploadMiddleware(req, res, async (err: unknown) => {
+    if (err) {
+      const message = err instanceof Error ? err.message : "Upload failed.";
+      return res.status(400).json({ message });
+    }
+    const file = (req as any).file as Express.Multer.File | undefined;
+    if (!file) {
+      return res.status(400).json({ message: "No image file was provided." });
+    }
+    try {
+      const folder = typeof req.body?.folder === "string" ? req.body.folder.replace(/[^a-z0-9_-]/gi, "") : "general";
+      const url = await uploadBufferToCloudinary(file.buffer, folder || "general");
+      await storage.recordAuditLog({
+        adminUserId: req.session.adminUserId,
+        action: "image.upload",
+        entityType: "upload",
+        ipAddress: req.ip ?? "",
+      });
+      res.status(201).json({ url });
+    } catch (uploadErr) {
+      const message = uploadErr instanceof Error ? uploadErr.message : "Upload failed.";
+      res.status(502).json({ message });
+    }
+  });
 });
 
 adminRouter.get("/audit-logs", async (_req, res) => {
