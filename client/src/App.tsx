@@ -25,6 +25,7 @@ import AdminMenu from "@/pages/admin/AdminMenu";
 import AdminReviews from "@/pages/admin/AdminReviews";
 import AdminFaqs from "@/pages/admin/AdminFaqs";
 import AdminContent from "@/pages/admin/AdminContent";
+import AdminMedia from "@/pages/admin/AdminMedia";
 import AdminAppearance from "@/pages/admin/AdminAppearance";
 import AdminSettings from "@/pages/admin/AdminSettings";
 
@@ -69,6 +70,7 @@ export default function App() {
         <Route path="/admin/reviews"><AdminRoute component={AdminReviews} /></Route>
         <Route path="/admin/faqs"><AdminRoute component={AdminFaqs} /></Route>
         <Route path="/admin/content"><AdminRoute component={AdminContent} /></Route>
+        <Route path="/admin/media"><AdminRoute component={AdminMedia} /></Route>
         <Route path="/admin/appearance"><AdminRoute component={AdminAppearance} /></Route>
         <Route path="/admin/settings"><AdminRoute component={AdminSettings} /></Route>
         <Route path="/admin/:rest*"><AdminRoute component={NotFound} /></Route>

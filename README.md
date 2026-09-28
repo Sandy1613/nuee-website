@@ -92,6 +92,7 @@ fill in real values:
 | `ADMIN_PASSWORD` | Used by seed | Password for the initial admin account (change after first login) |
 | `PORT` | No (default 5000) | Port the server listens on |
 | `NODE_ENV` | Set by npm scripts | `development` or `production` |
+| `CLOUDINARY_CLOUD_NAME` / `CLOUDINARY_API_KEY` / `CLOUDINARY_API_SECRET` | Optional | Enables "Upload Image" buttons in the admin dashboard. Without these, image fields still work as plain URL inputs. |
 
 In **production mode**, the app **requires** a real PostgreSQL database — it will not silently fall back to
 in-memory storage for events, bookings, reservations, authentication or seat availability. If `DATABASE_URL` is
@@ -158,7 +159,23 @@ URL: `/admin` (redirects to `/admin/login` if not authenticated)
 Sections: Overview, Events (create/edit/publish/duplicate/archive + sessions & capacity), Bookings (search,
 filter, confirm/reject, manual & complimentary bookings, check-in, CSV export), Table Reservations, Menu
 (categories/items, reorder, availability), Reviews, FAQs, Website Content (editable text used across the public
-site — address, hours, hero copy, etc.), Appearance (see below), and Settings (password change + audit log).
+site — address, hours, hero copy, etc.), Media (see below), Appearance (see below), and Settings (password change +
+audit log).
+
+### Media (image uploads)
+
+Admin → Media covers every photo on the public site other than event cover images (which are set per-event on the
+event form) — the homepage hero and gallery, the About page's 7 section photos, and the Visit Us page photos.
+
+- If `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` are set (a free Cloudinary account
+  provides all three), every image field gets an **Upload Image** button — pick a file from your computer or
+  phone, it uploads directly, no URL needed.
+- Without those set, the app works exactly the same, just without the upload button — every image field is still
+  a plain URL you can paste into, so nothing is required to get started.
+- Images are stored as one JSON blob under the `site_images` website content key (same pattern as `theme_config`),
+  so — like Appearance — this needs no schema changes and works identically in demo mode and production.
+- Uploaded files are never stored on the app server itself (Render's free tier disk isn't persistent across
+  deploys) — they go straight to Cloudinary's storage and only the resulting URL is saved in the database.
 
 ### Appearance (no-code theme editor)
 
@@ -237,4 +254,6 @@ beginner-friendly steps. For a real production deployment with persistent data, 
 - Run `npm run db:push` against the production database, then `npm run db:seed` once to create the first admin
   account (or insert one directly).
 - Replace placeholder images, menu, reviews and address/contact details via the admin dashboard.
+- Optionally set `CLOUDINARY_CLOUD_NAME`/`CLOUDINARY_API_KEY`/`CLOUDINARY_API_SECRET` (free tier) to enable
+  uploading photos directly from Admin → Media and the event form, instead of pasting URLs.
 - Add Razorpay (see above) before accepting real payments.

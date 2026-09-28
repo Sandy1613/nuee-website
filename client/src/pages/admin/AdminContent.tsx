@@ -31,7 +31,7 @@ export default function AdminContent() {
 
       <div className="space-y-6">
         {(content ?? [])
-          .filter((item) => item.key !== "theme_config")
+          .filter((item) => item.key !== "theme_config" && item.key !== "site_images")
           .map((item) => (
           <div key={item.key} className="border border-ivory/10 p-5">
             <Label>{item.label}</Label>

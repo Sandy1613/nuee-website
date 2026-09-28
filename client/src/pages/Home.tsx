@@ -7,21 +7,14 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { EventCard } from "@/components/EventCard";
 import { Button } from "@/components/ui/Button";
 import { useTableBookingModal } from "@/context/TableBookingModalContext";
-
-const GALLERY_IMAGES = [
-  "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?q=80&w=800&auto=format&fit=crop",
-];
+import { parseSiteImages } from "@/lib/siteImages";
 
 export default function Home() {
   const { open } = useTableBookingModal();
   const { data: events } = useQuery<EventWithSessions[]>({ queryKey: ["/api/events"] });
   const { data: reviews } = useQuery<Review[]>({ queryKey: ["/api/reviews"] });
   const { data: content } = useQuery<Record<string, string>>({ queryKey: ["/api/website-content"] });
+  const images = parseSiteImages(content?.site_images).home;
 
   const featured = (events ?? []).filter((e) => e.isFeatured).slice(0, 3);
   const bollywood = (events ?? []).find((e) => e.slug === "saturday-bollywood-jamming");
@@ -32,7 +25,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative h-[100svh] min-h-[640px] flex items-end grain-overlay overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2000&auto=format&fit=crop"
+          src={images.hero}
           alt="Nuée Tavern & Bar interior"
           className="absolute inset-0 h-full w-full object-cover"
         />
@@ -75,7 +68,7 @@ export default function Home() {
           <Reveal delay={0.15}>
             <div className="aspect-[4/5] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1200&auto=format&fit=crop"
+                src={images.intro}
                 alt="Nuée dining room"
                 className="h-full w-full object-cover"
               />
@@ -113,7 +106,7 @@ export default function Home() {
           <Reveal className="order-2 lg:order-1">
             <div className="aspect-[4/5] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop"
+                src={images.bollywood}
                 alt="Saturday Bollywood Jamming"
                 className="h-full w-full object-cover"
               />
@@ -156,7 +149,7 @@ export default function Home() {
           <Reveal delay={0.1}>
             <div className="aspect-[4/5] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=1200&auto=format&fit=crop"
+                src={images.lostRecipes}
                 alt="Lost Recipes of Maharashtra"
                 className="h-full w-full object-cover"
               />
@@ -195,8 +188,8 @@ export default function Home() {
             <SectionHeading eyebrow="Moments" title="From the Nuée Gallery" align="center" />
           </Reveal>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mt-14">
-            {GALLERY_IMAGES.map((src, i) => (
-              <Reveal key={src} delay={i * 0.05} className="aspect-square overflow-hidden group">
+            {images.gallery.map((src, i) => (
+              <Reveal key={i} delay={i * 0.05} className="aspect-square overflow-hidden group">
                 <img
                   src={src}
                   alt="Nuée gallery"
@@ -257,7 +250,7 @@ export default function Home() {
           <Reveal delay={0.1}>
             <div className="aspect-[4/3] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1200&auto=format&fit=crop"
+                src={images.location}
                 alt="Nuée exterior"
                 className="h-full w-full object-cover"
               />

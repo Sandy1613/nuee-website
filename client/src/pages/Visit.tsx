@@ -4,17 +4,12 @@ import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { useTableBookingModal } from "@/context/TableBookingModalContext";
-
-const GALLERY = [
-  "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=900&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=900&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=900&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=900&auto=format&fit=crop",
-];
+import { parseSiteImages } from "@/lib/siteImages";
 
 export default function Visit() {
   const { open } = useTableBookingModal();
   const { data: content } = useQuery<Record<string, string>>({ queryKey: ["/api/website-content"] });
+  const images = parseSiteImages(content?.site_images).visit;
 
   return (
     <div className="pt-40 pb-28">
@@ -66,7 +61,7 @@ export default function Visit() {
         <Reveal delay={0.1}>
           <div className="aspect-[4/3] overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1400&auto=format&fit=crop"
+              src={images.hero}
               alt="Nuée Tavern & Bar exterior"
               className="h-full w-full object-cover"
             />
@@ -79,8 +74,8 @@ export default function Visit() {
           <p className="eyebrow mb-8">Gallery</p>
         </Reveal>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {GALLERY.map((src, i) => (
-            <Reveal key={src} delay={i * 0.05} className="aspect-square overflow-hidden group">
+          {images.gallery.map((src, i) => (
+            <Reveal key={i} delay={i * 0.05} className="aspect-square overflow-hidden group">
               <img src={src} alt="Nuée" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
             </Reveal>
           ))}
