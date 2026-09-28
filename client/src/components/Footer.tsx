@@ -15,7 +15,7 @@ export function Footer() {
             NU<span className="text-gold">É</span>E
           </div>
           <p className="text-sm text-ivory/55 leading-relaxed">
-            {content?.intro_text?.slice(0, 140) ?? "A tavern and bar built around slowness, seasonal produce and considered hospitality."}
+            {content?.intro_text?.slice(0, 140) ?? "A tavern first, a bar close behind — built around long dinners, Maharashtra's pantry, and evenings that don't get rushed."}
           </p>
         </div>
 
