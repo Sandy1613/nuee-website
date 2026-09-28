@@ -11,8 +11,15 @@ export interface ThemeColors {
 }
 
 export interface ThemeFonts {
-  heading: string; // Google Fonts family name
-  body: string; // Google Fonts family name
+  heading: string; // font family name (Google Fonts, or a system font)
+  body: string; // font family name (Google Fonts, or a system font)
+}
+
+interface FontOption {
+  name: string;
+  fallback: string;
+  /** "system" fonts ship with the OS/browser and are never fetched from Google Fonts. */
+  type?: "system";
 }
 
 export interface SiteTheme {
@@ -32,22 +39,26 @@ export const DEFAULT_THEME: SiteTheme = {
   },
 };
 
-export const HEADING_FONTS = [
+export const HEADING_FONTS: FontOption[] = [
   { name: "Playfair Display", fallback: "serif" },
   { name: "Cormorant Garamond", fallback: "serif" },
   { name: "Fraunces", fallback: "serif" },
   { name: "Lora", fallback: "serif" },
   { name: "EB Garamond", fallback: "serif" },
   { name: "Libre Caslon Text", fallback: "serif" },
+  { name: "Poppins", fallback: "sans-serif" },
+  { name: "Times New Roman", fallback: "serif", type: "system" },
 ];
 
-export const BODY_FONTS = [
+export const BODY_FONTS: FontOption[] = [
   { name: "Inter", fallback: "system-ui, sans-serif" },
   { name: "Manrope", fallback: "system-ui, sans-serif" },
   { name: "Work Sans", fallback: "system-ui, sans-serif" },
   { name: "Outfit", fallback: "system-ui, sans-serif" },
   { name: "Jost", fallback: "system-ui, sans-serif" },
   { name: "Karla", fallback: "system-ui, sans-serif" },
+  { name: "Poppins", fallback: "sans-serif" },
+  { name: "Times New Roman", fallback: "serif", type: "system" },
 ];
 
 // ---- Color math (hex <-> HSL) ----------------------------------------
@@ -156,8 +167,8 @@ export function applyTheme(theme: SiteTheme) {
   root.style.setProperty("--font-display", fontFamilyValue(heading.name, heading.fallback));
   root.style.setProperty("--font-sans", fontFamilyValue(body.name, body.fallback));
 
-  loadGoogleFont(heading.name);
-  loadGoogleFont(body.name);
+  if (heading.type !== "system") loadGoogleFont(heading.name);
+  if (body.type !== "system") loadGoogleFont(body.name);
 }
 
 const loadedFonts = new Set<string>();

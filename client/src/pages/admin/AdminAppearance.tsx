@@ -27,8 +27,10 @@ export default function AdminAppearance() {
   }, [content]);
 
   useEffect(() => {
-    loadGoogleFont(theme.fonts.heading);
-    loadGoogleFont(theme.fonts.body);
+    const heading = HEADING_FONTS.find((f) => f.name === theme.fonts.heading);
+    const body = BODY_FONTS.find((f) => f.name === theme.fonts.body);
+    if (heading?.type !== "system") loadGoogleFont(theme.fonts.heading);
+    if (body?.type !== "system") loadGoogleFont(theme.fonts.body);
   }, [theme.fonts.heading, theme.fonts.body]);
 
   const save = useMutation({
