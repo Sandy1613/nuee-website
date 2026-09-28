@@ -348,7 +348,7 @@ async function seedWebsiteContent() {
       key: "intro_text",
       label: "Nuée Introduction",
       value:
-        "Nuée is a tavern and bar built around slowness — considered plates, warm light, and evenings that don't rush toward last call. We draw from the region's produce and its forgotten recipes in equal measure, serving both with the same quiet confidence.",
+        "Nuée opened as a tavern first, with a bar close behind it — the kind of place where nobody rushes you off a table for the next seating. The kitchen leans hard on Maharashtra's pantry: kokum, goda masala, jackfruit in season, whatever's good at the market that week. Most of it lands on the specials board before it ever makes the permanent menu.",
     },
     {
       key: "parking_info",

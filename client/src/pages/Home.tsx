@@ -55,11 +55,11 @@ export default function Home() {
           <Reveal>
             <p className="eyebrow mb-5">Nuée</p>
             <h2 className="font-display text-4xl sm:text-5xl leading-tight mb-6 text-balance">
-              A tavern built around slowness.
+              A tavern first, a bar close behind.
             </h2>
             <p className="text-ivory/65 leading-relaxed mb-6">
               {content?.intro_text ??
-                "Nuée is a tavern and bar built around slowness — considered plates, warm light, and evenings that don't rush toward last call."}
+                "Nuée opened as a tavern first, with a bar close behind it — the kind of place where nobody rushes you off a table for the next seating."}
             </p>
             <Link href="/about" className="text-gold text-sm uppercase tracking-widest border-b border-gold/40 pb-1 hover:border-gold transition-colors">
               Our Story
@@ -118,9 +118,8 @@ export default function Home() {
               Saturday Bollywood Jamming
             </h2>
             <p className="text-ivory/65 leading-relaxed mb-8">
-              Live Bollywood music and an intimate dining atmosphere at Nuée Tavern &amp; Bar, Kalyani Nagar. Our
-              house band takes the room through a soulful, unplugged evening — no cover charge, just good company
-              and a full à la carte menu.
+              Our house band plays Bollywood classics unplugged — no backing tracks, no cover charge. Just the full
+              à la carte menu and a room that gets louder as the night goes on.
             </p>
             <Link href={bollywood ? `/events/${bollywood.slug}` : "/events"}>
               <Button variant="outline">Reserve Your Table</Button>
@@ -138,8 +137,8 @@ export default function Home() {
               Lost Recipes of Maharashtra
             </h2>
             <p className="text-ivory/65 leading-relaxed mb-4">
-              A curated exploration of forgotten regional recipes, revived and served family-style. ₹2,500++ per
-              person, reservation only.
+              A set Maharashtrian menu built around recipes that have mostly disappeared from restaurant kitchens,
+              served family-style at one long table. ₹2,500++ per person, reservation only.
             </p>
             <p className="text-ivory/45 text-sm mb-8">Reservation required — limited covers each session.</p>
             <Link href={lostRecipes ? `/events/${lostRecipes.slug}` : "/events"}>
@@ -163,19 +162,18 @@ export default function Home() {
         <div className="container-editorial grid grid-cols-1 lg:grid-cols-2 gap-16">
           <Reveal>
             <p className="eyebrow mb-5">The Experience</p>
-            <h3 className="font-display text-3xl mb-5 text-balance">Fine dining, without the formality.</h3>
+            <h3 className="font-display text-3xl mb-5 text-balance">Two hours at a table, no one rushing you.</h3>
             <p className="text-ivory/60 leading-relaxed">
-              Every table at Nuée is set with intention — soft light, unhurried service, and a room designed to make
-              two hours feel like an evening well spent. It's fine dining measured in comfort, not ceremony.
+              There's no tasting-menu clock running here. Sit as long as you like after the last course — the table
+              is yours until you ask for the bill, not the other way around.
             </p>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="eyebrow mb-5">The Menu</p>
-            <h3 className="font-display text-3xl mb-5 text-balance">Seasonal by philosophy, not by trend.</h3>
+            <h3 className="font-display text-3xl mb-5 text-balance">Ask what's good today. The answer changes.</h3>
             <p className="text-ivory/60 leading-relaxed">
-              Our menus shift with what the season offers — produce at its peak, recipes revisited, and a bar list
-              that changes as often as the weather. Nothing is on the menu because it's easy; everything is there
-              because it's right for now.
+              The kitchen reworks parts of the menu through the year as ingredients come and go. If a dish
+              disappears mid-season, it's usually because something better turned up at the market that week.
             </p>
           </Reveal>
         </div>
@@ -265,7 +263,7 @@ export default function Home() {
           <Reveal>
             <p className="eyebrow mb-6">Reserve</p>
             <h2 className="font-display text-4xl sm:text-6xl leading-tight max-w-3xl mx-auto text-balance mb-10">
-              Your table at Nuée is waiting.
+              Come hungry. We'll hold the table.
             </h2>
             <Button size="lg" onClick={open}>Book a Table</Button>
           </Reveal>

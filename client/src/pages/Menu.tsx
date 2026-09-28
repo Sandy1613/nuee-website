@@ -24,8 +24,8 @@ export default function Menu() {
         <Reveal>
           <SectionHeading
             eyebrow="Nuée Menu"
-            title="Seasonal, Considered, Shared"
-            description="A living menu that shifts with the season. Sample content below is clearly marked and editable by our team."
+            title="What's Cooking This Season"
+            description="Updated as the season changes — ask your server about today's specials, some haven't made it onto the printed page yet."
           />
         </Reveal>
       </div>

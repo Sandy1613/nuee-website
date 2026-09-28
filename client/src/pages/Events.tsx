@@ -17,7 +17,7 @@ export default function Events() {
           <SectionHeading
             eyebrow="Nuée Events"
             title="Upcoming Events & Experiences"
-            description="From our weekly live music evenings to seasonal tasting menus — reserve your place at the table."
+            description="Live music most Saturdays, a set Maharashtrian menu most Sundays, and the occasional one-off in between. Most sessions cap out, so reserve ahead."
           />
         </Reveal>
       </div>
