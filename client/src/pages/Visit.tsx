@@ -42,6 +42,15 @@ export default function Visit() {
               <p className="text-ivory/70">{content?.phone}</p>
             </div>
           </div>
+          {content?.reservation_phone && (
+            <div className="flex gap-4">
+              <Phone className="text-gold shrink-0 mt-1" size={20} />
+              <div>
+                <p className="eyebrow mb-1">Call or WhatsApp to Book</p>
+                <p className="text-ivory/70">{content.reservation_phone}</p>
+              </div>
+            </div>
+          )}
           <div className="flex gap-4">
             <Car className="text-gold shrink-0 mt-1" size={20} />
             <div>

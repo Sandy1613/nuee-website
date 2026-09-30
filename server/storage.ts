@@ -15,6 +15,8 @@ export const {
   createAdminUser,
   touchAdminLastLogin,
   updateAdminPasswordHash,
+  listAdminUsers,
+  setAdminUserActive,
   getSessionGuestCount,
   getPublishedEvents,
   getPublishedEventBySlug,

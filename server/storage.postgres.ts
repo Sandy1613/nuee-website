@@ -81,6 +81,14 @@ export async function updateAdminPasswordHash(id: number, passwordHash: string) 
   await db.update(adminUsers).set({ passwordHash }).where(eq(adminUsers.id, id));
 }
 
+export async function listAdminUsers(): Promise<AdminUser[]> {
+  return db.select().from(adminUsers).orderBy(adminUsers.createdAt);
+}
+
+export async function setAdminUserActive(id: number, isActive: boolean): Promise<void> {
+  await db.update(adminUsers).set({ isActive }).where(eq(adminUsers.id, id));
+}
+
 // ---------------------------------------------------------------------------
 // Sessions / availability helpers
 // ---------------------------------------------------------------------------

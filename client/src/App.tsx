@@ -27,6 +27,7 @@ import AdminFaqs from "@/pages/admin/AdminFaqs";
 import AdminContent from "@/pages/admin/AdminContent";
 import AdminMedia from "@/pages/admin/AdminMedia";
 import AdminAppearance from "@/pages/admin/AdminAppearance";
+import AdminTeam from "@/pages/admin/AdminTeam";
 import AdminSettings from "@/pages/admin/AdminSettings";
 
 function PublicRoutes() {
@@ -72,6 +73,7 @@ export default function App() {
         <Route path="/admin/content"><AdminRoute component={AdminContent} /></Route>
         <Route path="/admin/media"><AdminRoute component={AdminMedia} /></Route>
         <Route path="/admin/appearance"><AdminRoute component={AdminAppearance} /></Route>
+        <Route path="/admin/team"><AdminRoute component={AdminTeam} /></Route>
         <Route path="/admin/settings"><AdminRoute component={AdminSettings} /></Route>
         <Route path="/admin/:rest*"><AdminRoute component={NotFound} /></Route>
         <Route>

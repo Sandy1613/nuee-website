@@ -137,6 +137,71 @@ adminRouter.put("/me/password", async (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
+// Team (admin user management)
+// ---------------------------------------------------------------------------
+
+function stripHash(user: { passwordHash: string; [key: string]: unknown }) {
+  const { passwordHash, ...rest } = user;
+  return rest;
+}
+
+adminRouter.get("/team", async (_req, res) => {
+  const users = await storage.listAdminUsers();
+  res.json(users.map(stripHash));
+});
+
+adminRouter.post("/team", async (req, res) => {
+  const schema = z.object({
+    name: z.string().min(1),
+    email: z.string().email(),
+    password: z.string().min(8),
+  });
+  const parsed = schema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ message: fromError(parsed.error).toString() });
+  }
+  const existing = await storage.getAdminUserByEmail(parsed.data.email);
+  if (existing) {
+    return res.status(409).json({ message: "An admin with this email already exists." });
+  }
+  const passwordHash = await hashPassword(parsed.data.password);
+  const user = await storage.createAdminUser({
+    name: parsed.data.name,
+    email: parsed.data.email,
+    passwordHash,
+    role: "admin",
+    isActive: true,
+  });
+  await storage.recordAuditLog({
+    ...auditFrom(req),
+    action: "admin.team_add",
+    entityType: "admin_user",
+    entityId: String(user.id),
+  });
+  res.status(201).json(stripHash(user));
+});
+
+adminRouter.put("/team/:id/active", async (req, res) => {
+  const id = Number(req.params.id);
+  const schema = z.object({ isActive: z.boolean() });
+  const parsed = schema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ message: fromError(parsed.error).toString() });
+  }
+  if (!parsed.data.isActive && id === req.session.adminUserId) {
+    return res.status(400).json({ message: "You cannot deactivate your own account." });
+  }
+  await storage.setAdminUserActive(id, parsed.data.isActive);
+  await storage.recordAuditLog({
+    ...auditFrom(req),
+    action: parsed.data.isActive ? "admin.team_reactivate" : "admin.team_deactivate",
+    entityType: "admin_user",
+    entityId: String(id),
+  });
+  res.json({ ok: true });
+});
+
+// ---------------------------------------------------------------------------
 // Events
 // ---------------------------------------------------------------------------
 
