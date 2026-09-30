@@ -64,6 +64,16 @@ export default function Visit() {
               <Button variant="outline">Google Maps</Button>
             </a>
             <Button onClick={open}>Book a Table</Button>
+            {content?.zomato_link && (
+              <a href={content.zomato_link} target="_blank" rel="noreferrer">
+                <Button variant="ghost">Reserve on Zomato</Button>
+              </a>
+            )}
+            {content?.swiggy_link && (
+              <a href={content.swiggy_link} target="_blank" rel="noreferrer">
+                <Button variant="ghost">View on Swiggy</Button>
+              </a>
+            )}
           </div>
         </Reveal>
 
