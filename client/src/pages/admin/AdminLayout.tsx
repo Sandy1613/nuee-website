@@ -16,6 +16,7 @@ import {
   Armchair,
   Palette,
   Images,
+  Users,
 } from "lucide-react";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { apiRequest } from "@/lib/queryClient";
@@ -34,6 +35,7 @@ const navItems = [
   { href: "/admin/content", label: "Website Content", icon: FileText },
   { href: "/admin/media", label: "Media", icon: Images },
   { href: "/admin/appearance", label: "Appearance", icon: Palette },
+  { href: "/admin/team", label: "Team", icon: Users },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 

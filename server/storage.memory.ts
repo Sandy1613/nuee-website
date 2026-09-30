@@ -332,6 +332,15 @@ export async function updateAdminPasswordHash(id: number, passwordHash: string) 
   if (user) user.passwordHash = passwordHash;
 }
 
+export async function listAdminUsers(): Promise<AdminUser[]> {
+  return [...adminUsersTable].sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+}
+
+export async function setAdminUserActive(id: number, isActive: boolean): Promise<void> {
+  const user = adminUsersTable.find((u) => u.id === id);
+  if (user) user.isActive = isActive;
+}
+
 // ---------------------------------------------------------------------------
 // Sessions / availability helpers
 // ---------------------------------------------------------------------------

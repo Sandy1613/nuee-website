@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { insertTableReservationSchema, type InsertTableReservation } from "@shared/schema";
@@ -14,6 +14,7 @@ import { useSystemMode } from "@/hooks/useSystemMode";
 export function TableReservationModal() {
   const { isOpen, close } = useTableBookingModal();
   const { isDemo } = useSystemMode();
+  const { data: content } = useQuery<Record<string, string>>({ queryKey: ["/api/website-content"] });
   const [reference, setReference] = useState<string | null>(null);
 
   const {
@@ -91,7 +92,14 @@ export function TableReservationModal() {
             ) : (
               <>
                 <p className="eyebrow mb-2">Reserve a Table</p>
-                <h3 className="font-display text-3xl mb-6">Book a Table</h3>
+                <h3 className="font-display text-3xl mb-2">Book a Table</h3>
+                {content?.reservation_phone && (
+                  <p className="text-ivory/50 text-sm mb-6">
+                    Prefer to call or WhatsApp? Reach us directly at{" "}
+                    <span className="text-gold">{content.reservation_phone}</span>. For groups larger than 30,
+                    please call us — we can seat up to 120 for private events.
+                  </p>
+                )}
                 <form
                   onSubmit={handleSubmit((data) => mutation.mutate(data))}
                   className="space-y-5"

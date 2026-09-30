@@ -15,9 +15,10 @@ export function toDateOnly(d: Date): string {
 
 export const DEMO_WEBSITE_CONTENT: { key: string; label: string; value: string }[] = [
   { key: "address", label: "Full Address", value: "Nuée Tavern & Bar, Kalyani Nagar, Pune, Maharashtra, India" },
-  { key: "phone", label: "Telephone Number", value: "+91 98765 43210" },
-  { key: "email", label: "Contact Email", value: "hello@nuee.example" },
-  { key: "hours", label: "Opening Hours", value: "Mon–Fri: 5:00 PM – 12:00 AM  |  Sat–Sun: 12:30 PM – 12:00 AM" },
+  { key: "phone", label: "Telephone Number", value: "+91 72493 16006" },
+  { key: "reservation_phone", label: "Reservation / WhatsApp Number", value: "+91 86984 81561" },
+  { key: "email", label: "Contact Email", value: "nuee.pune@gmail.com" },
+  { key: "hours", label: "Opening Hours", value: "Daily: 11:00 AM – 12:00 Midnight" },
   { key: "maps_link", label: "Google Maps Link", value: "https://maps.google.com/?q=Nuee+Tavern+Bar+Kalyani+Nagar+Pune" },
   { key: "instagram_handle", label: "Instagram Handle", value: "@nuee.tavern" },
   { key: "hero_title", label: "Home Hero Title", value: "An Evening, Unhurried." },
@@ -35,8 +36,7 @@ export const DEMO_WEBSITE_CONTENT: { key: string; label: string; value: string }
   {
     key: "parking_info",
     label: "Parking & Dining Information",
-    value:
-      "Valet parking available on weekends. Ample on-street parking on weekdays. Indoor and courtyard seating both available on request.",
+    value: "Valet parking available.",
   },
   {
     key: "theme_config",
