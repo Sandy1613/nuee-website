@@ -333,8 +333,15 @@ async function seedWebsiteContent() {
       label: "Opening Hours",
       value: "Daily: 11:00 AM – 12:00 Midnight",
     },
-    { key: "maps_link", label: "Google Maps Link", value: "https://maps.google.com/?q=Nuee+Tavern+Bar+Kalyani+Nagar+Pune" },
-    { key: "instagram_handle", label: "Instagram Handle", value: "@nuee.tavern" },
+    { key: "maps_link", label: "Google Maps Link", value: "https://share.google/Pnw5JS4toje8e7cm9" },
+    { key: "instagram_handle", label: "Instagram Handle", value: "@nueepune" },
+    { key: "instagram_link", label: "Instagram Profile Link", value: "https://www.instagram.com/nueepune/" },
+    { key: "zomato_link", label: "Zomato Page Link", value: "https://www.zomato.com/pune/nuee-kalyani-nagar" },
+    {
+      key: "swiggy_link",
+      label: "Swiggy Dineout Link",
+      value: "https://www.swiggy.com/restaurants/pune/kalyani-nagar/nuee-1390100/dineout/menu",
+    },
     {
       key: "hero_title",
       label: "Home Hero Title",

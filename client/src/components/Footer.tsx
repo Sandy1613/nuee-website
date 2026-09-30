@@ -40,12 +40,12 @@ export function Footer() {
         <div>
           <h4 className="eyebrow mb-4">Follow</h4>
           <a
-            href={content?.maps_link ?? "#"}
+            href={content?.instagram_link ?? "#"}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 text-sm text-ivory/70 hover:text-gold transition-colors"
           >
-            <Instagram size={16} className="text-gold" /> {content?.instagram_handle ?? "@nuee.tavern"}
+            <Instagram size={16} className="text-gold" /> {content?.instagram_handle ?? "@nueepune"}
           </a>
         </div>
       </div>

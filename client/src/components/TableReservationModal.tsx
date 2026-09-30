@@ -94,10 +94,19 @@ export function TableReservationModal() {
                 <p className="eyebrow mb-2">Reserve a Table</p>
                 <h3 className="font-display text-3xl mb-2">Book a Table</h3>
                 {content?.reservation_phone && (
-                  <p className="text-ivory/50 text-sm mb-6">
+                  <p className="text-ivory/50 text-sm mb-2">
                     Prefer to call or WhatsApp? Reach us directly at{" "}
                     <span className="text-gold">{content.reservation_phone}</span>. For groups larger than 30,
                     please call us — we can seat up to 120 for private events.
+                  </p>
+                )}
+                {content?.zomato_link && (
+                  <p className="text-ivory/50 text-sm mb-6">
+                    You can also{" "}
+                    <a href={content.zomato_link} target="_blank" rel="noreferrer" className="text-gold underline underline-offset-4">
+                      reserve instantly on Zomato
+                    </a>
+                    .
                   </p>
                 )}
                 <form
